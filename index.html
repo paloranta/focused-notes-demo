@@ -14,6 +14,7 @@
             background-color: #f6f7f9;
             padding: 0 4rem;
             display: grid;
+            width: 100%;
         }
 
         h1,
@@ -39,6 +40,7 @@
             padding: .5em;
             background-color: #f6f7f9;
             word-break: break-all;
+            max-width: inherit;
         }
 
         kbd {
@@ -121,6 +123,12 @@
             background-color: #eee !important;
             box-shadow: 0 0 0 9999px #ffffff80;
         }
+
+        .container > *:not(button) {
+            display: grid;
+            grid-gap: 1rem;
+            border-top: 2px solid #50fa7b;
+        }   
     </style>
 
 
@@ -176,7 +184,7 @@
             const html = val.trim();
             const valDiv = document.createElement('div');
             valDiv.innerHTML = html;
-            valDiv.style = "border-top: 2px solid #50fa7b;"
+            valDiv.classList.add('container');
             document.body.appendChild(valDiv);
         });
     }
@@ -187,7 +195,7 @@
         delButton.classList.add('delButton')
         const newDiv = document.createElement('div');
         const contDiv = document.createElement('div');
-        contDiv.style = "border-top: 2px solid #50fa7b;";
+        contDiv.classList.add('container');
         const newh2 = document.createElement('h2');
         const options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
         const pvm = new Date();
