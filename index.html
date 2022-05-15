@@ -197,7 +197,7 @@
         const otsikko = pvm.toLocaleDateString('en-US', options) + " " + aika;
         newh2.textContent = otsikko;
         const newP = document.createElement('p');
-        newP.innerHTML = "Placeholder text — delete away."
+        newP.innerHTML = "Placeholder text — delete away or type over."
         contDiv.appendChild(delButton);
         contDiv.appendChild(newDiv);
         document.body.appendChild(contDiv);
@@ -209,6 +209,16 @@
         newDiv.setAttribute('onblur', 'saveNote(' + `'` + id + `'` + ');');
         saveNote(id);
         bottomFunction();
+
+        /* Select placeholder text automatically when creating a new note */
+        /* https://thewebdev.info/2021/05/01/how-to-set-the-cursor-position-on-contenteditable-div-with-javascript/ */
+
+        const selection = window.getSelection();
+        const range = document.createRange(id);
+        selection.removeAllRanges();
+        // Select the added paragraph placeholder text 
+        range.selectNodeContents(document.getElementById(id).lastChild);
+        selection.addRange(range);
         document.getElementById(id).focus();
     }
 
@@ -216,7 +226,7 @@
     window.addEventListener('load', getNotes());
 
     /* https://www.w3schools.com/howto/howto_js_scroll_to_top.asp */
-    //Get the button:
+    // Get the button:
     const topbutton = document.getElementById("topBtn");
     const dnbutton = document.getElementById("dnBtn");
 
